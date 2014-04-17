@@ -598,7 +598,11 @@ class Stage extends Sprite {
 			touchEvent.isPrimaryTouchPoint = true;
 			
 			__fireEvent (touchEvent, __stack);
-			__fireEvent (MouseEvent.__create (mouseType, cast event, localPoint, cast target), __stack);
+			
+			var mouseEvent = MouseEvent.__create (mouseType, cast event, localPoint, cast target);
+			if (type != TouchEvent.TOUCH_END)
+				mouseEvent.buttonDown = true;
+			__fireEvent (mouseEvent, __stack);
 			
 		} else {
 			
@@ -608,7 +612,11 @@ class Stage extends Sprite {
 			touchEvent.isPrimaryTouchPoint = true;
 			
 			__fireEvent (touchEvent, [ this ]);
-			__fireEvent (MouseEvent.__create (mouseType, cast event, point, this), [ this ]);
+			
+			var mouseEvent = MouseEvent.__create (mouseType, cast event, point, this);
+			if (type != TouchEvent.TOUCH_END)
+				mouseEvent.buttonDown = true;
+			__fireEvent (mouseEvent, [ this ]);
 			
 		}
 		
