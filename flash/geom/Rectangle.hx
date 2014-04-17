@@ -245,13 +245,35 @@ class Rectangle {
 			
 		}
 		
-		var cacheRight = right;
-		var cacheBottom = bottom;
+		var dx = this.x - x;
 		
-		if (this.x > x) this.x = x;
-		if (this.y > y) this.y = y;
-		if (cacheRight < x + width) this.width = x + width - this.x;
-		if (cacheBottom < y + height) this.height = y + height - this.y;
+		if (dx > 0) {
+			
+			this.x -= dx;
+			this.width += dx;
+			
+		}
+		
+		var dy = this.y - y;
+		
+		if (dy > 0) {
+			
+			this.y -= dy;
+			this.height += dy;
+			
+		}
+		
+		if (x + width > this.right) {
+			
+			this.right = x + width;
+			
+		}
+		
+		if (y + height > this.bottom) {
+			
+			this.bottom = y + height;
+			
+		}
 		
 	}
 	
