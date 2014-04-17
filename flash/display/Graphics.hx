@@ -512,14 +512,19 @@ class Graphics {
 								__closePath (false);
 								
 								// TODO: Need to handle fill matrix
-								
+								var dx = x;
+								var dy = y;
+								if (bitmapMatrix != null) {
+									dx -= bitmapMatrix.tx;
+									dy -= bitmapMatrix.ty;
+								}
 								if (bitmapFill.__sourceImage != null) {
 									
-									__context.drawImage (bitmapFill.__sourceImage, 0, 0, bitmapFill.width, bitmapFill.height, x, y, width, height);
+									__context.drawImage (bitmapFill.__sourceImage, dx, dy, width, height, 0, 0, width, height);
 									
 								} else {
 									
-									__context.drawImage (bitmapFill.__sourceCanvas, 0, 0, bitmapFill.width, bitmapFill.height, x, y, width, height);
+									__context.drawImage (bitmapFill.__sourceCanvas, dx, dy, width, height, 0, 0, width, height);
 									
 								}
 								
