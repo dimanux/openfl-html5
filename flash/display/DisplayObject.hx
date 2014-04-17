@@ -32,7 +32,7 @@ class DisplayObject extends EventDispatcher implements IBitmapDrawable {
 	public var scale9Grid:Rectangle;
 	@:isVar public var scaleX (get, set):Float;
 	@:isVar public var scaleY (get, set):Float;
-	public var scrollRect:Rectangle;
+	@:isVar public var scrollRect (get, set):Rectangle;
 	public var stage (default, null):Stage;
 	public var transform (get, set):Transform;
 	@:isVar public var visible (get, set):Bool;
@@ -228,6 +228,13 @@ class DisplayObject extends EventDispatcher implements IBitmapDrawable {
 			__rotationSine = Math.sin (radians);
 			__rotationCosine = Math.cos (radians);
 			
+		}
+		
+		var x = this.x;
+		var y = this.y;
+		if (scrollRect != null) {
+			x -= scrollRect.x;
+			y -= scrollRect.y;
 		}
 		
 		if (parent != null) {
@@ -491,6 +498,19 @@ class DisplayObject extends EventDispatcher implements IBitmapDrawable {
 	private function set_y (value:Float):Float {
 		
 		return y = value;
+		
+	}
+	
+	
+	private function get_scrollRect():Rectangle {
+		
+		return scrollRect;
+		
+	}
+	
+	private function set_scrollRect(value:Rectangle):Rectangle {
+		
+		return scrollRect = value;
 		
 	}
 	

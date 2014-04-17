@@ -382,6 +382,24 @@ class DisplayObjectContainer extends InteractiveObject {
 		
 		if (!__renderable) return;
 		
+		if (scrollRect != null) {
+			
+			var context = renderSession.context;
+			context.save();
+			
+			var transform = __worldTransform;
+			if (renderSession.roundPixels) {
+				context.setTransform (transform.a, transform.b, transform.c, transform.d, Std.int (transform.tx), Std.int (transform.ty));
+			} else {
+				context.setTransform (transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty);
+			}
+			context.beginPath ();
+			renderSession.context.rect (scrollRect.x, scrollRect.y, scrollRect.width, scrollRect.height);
+			
+			context.clip();
+			
+		}
+		
 		if (__mask != null) {
 			
 			renderSession.maskManager.pushMask (__mask);
@@ -397,6 +415,12 @@ class DisplayObjectContainer extends InteractiveObject {
 		if (__mask != null) {
 			
 			renderSession.maskManager.popMask ();
+			
+		}
+		
+		if (scrollRect != null) {
+			
+			renderSession.context.restore();
 			
 		}
 		
