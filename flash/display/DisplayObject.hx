@@ -89,7 +89,8 @@ class DisplayObject extends EventDispatcher implements IBitmapDrawable {
 		
 		var matrixCache = __worldTransform;
 		__worldTransform = matrix;
-		__getBounds (bounds, matrix);
+		__updateChildren();
+		__getBounds(bounds, null);
 		__worldTransform = matrixCache;
 		
 		return bounds;
