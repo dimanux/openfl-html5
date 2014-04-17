@@ -217,6 +217,12 @@ class Rectangle {
 	
 	public function union (toUnion:Rectangle):Rectangle {
 		
+		// The union() method ignores rectangles with 0 as the height or width value, such as: var rect2:Rectangle = new Rectangle(300,300,50,0);
+		if (width == 0 || height == 0)
+			return new Rectangle(toUnion.x, toUnion.y, toUnion.width, toUnion.height);
+		if (toUnion.width == 0 || toUnion.height == 0)
+			return new Rectangle(x, y, width, height);
+			
 		var x0 = x > toUnion.x ? toUnion.x : x;
 		var x1 = right < toUnion.right ? toUnion.right : right;
 		var y0 = y > toUnion.y ? toUnion.y : y;
