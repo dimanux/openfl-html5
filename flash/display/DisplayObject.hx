@@ -197,6 +197,12 @@ class DisplayObject extends EventDispatcher implements IBitmapDrawable {
 		
 		if (this.stage != stage) {
 			
+			if (this.stage != null) {
+
+				dispatchEvent (new Event (Event.REMOVED_FROM_STAGE, false, false));
+
+			}
+			
 			this.stage = stage;
 			
 			if (stage != null) {

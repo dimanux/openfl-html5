@@ -300,7 +300,7 @@ class DisplayObjectContainer extends InteractiveObject {
 		
 		for (child in __children) {
 			
-			if (!child.__renderable) continue;
+			if (!(visible && scaleX != 0 && scaleY != 0 && !__isMask)) continue;
 			child.__getBounds (rect, matrix);
 			
 		}
@@ -441,6 +441,12 @@ class DisplayObjectContainer extends InteractiveObject {
 	private override function __setStageReference (stage:Stage):Void {
 		
 		if (this.stage != stage) {
+			
+			if (this.stage != null) {
+				
+				dispatchEvent (new Event (Event.REMOVED_FROM_STAGE, false, false));
+				
+			}
 			
 			this.stage = stage;
 			
